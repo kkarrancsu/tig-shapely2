@@ -1,6 +1,5 @@
 streamlit
-altair
-pandas
 numpy
-math
+pandas
 scipy
+altair

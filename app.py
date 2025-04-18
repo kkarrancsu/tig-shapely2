@@ -100,9 +100,9 @@ penalties['AI'] = st.sidebar.slider(
     disabled=require_ai,
     help="This penalty only applies when 'Require AI' is unchecked"
 )
-penalties['B'] = st.sidebar.slider("Benchmarkers (B) Missing Penalty", 0.0, 1.0, 0.10, 0.01)
-penalties['CI'] = st.sidebar.slider("Code Innovators (CI) Missing Penalty", 0.0, 1.0, 0.02, 0.01)
-penalties['CM'] = st.sidebar.slider("Challenge Maintainers (CM) Missing Penalty", 0.0, 1.0, 0.40, 0.01)
+penalties['B'] = st.sidebar.slider("Benchmarkers (B) Missing Penalty", 0.0, 1.0, 0.50, 0.01)
+penalties['CI'] = st.sidebar.slider("Code Innovators (CI) Missing Penalty", 0.0, 1.0, 0.1, 0.01)
+penalties['CM'] = st.sidebar.slider("Challenge Maintainers (CM) Missing Penalty", 0.0, 1.0, 0.20, 0.01)
 
 # Create tabs
 tab1, tab2 = st.tabs(["Point Estimates", "Uncertainty Analysis"])
@@ -191,19 +191,19 @@ with tab2:
         st.sidebar.markdown(f"**{role} Parameters**")
         col1, col2 = st.sidebar.columns(2)
         if role == 'CM': 
-            alpha_start = 6.0
-            beta_start = 6.0
+            alpha_start = 5.0
+            beta_start = 20.0
         elif role == 'CI':
             alpha_start = 1.0
             beta_start = 10.0
         else:  # B
-            alpha_start = 2.0
-            beta_start = 8.0
+            alpha_start = 6.0
+            beta_start = 6.0
         with col1:
             alpha = st.number_input(
                 f"{role} Alpha",
                 min_value=0.0,
-                max_value=10.0,
+                max_value=100.0,
                 value=alpha_start,
                 step=0.1,
                 key=f"{role}_alpha",
@@ -214,7 +214,7 @@ with tab2:
             beta_param = st.number_input(
                 f"{role} Beta",
                 min_value=0.0,
-                max_value=10.0,
+                max_value=100.0,
                 value=beta_start,
                 step=0.1,
                 key=f"{role}_beta",
